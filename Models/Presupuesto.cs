@@ -1,10 +1,14 @@
 public class Presupuesto
 {
     public int IdPresupuesto { get; set; }
-    public string nombreDestinatario { get; set; }
+    public string NombreDestinatario { get; set; }
     public DateTime FechaCreacion { get; set; }
-    public List<PresupuestoDetalle> detalle { get; set; }
+    public List<PresupuestoDetalle> Detalle { get; set; }
 
+    public Presupuesto()
+    {
+        
+    }
     public int MontoPresupuesto()
     {
         return 1;

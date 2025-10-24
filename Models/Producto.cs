@@ -4,4 +4,9 @@ public class Producto
     public string descripcion { get; set; }
     public int precio { get; set; }
 
+    public Producto()
+    {
+        
+    }
+
 }
