@@ -8,17 +8,16 @@ public class PresupuestooRepository
     {
         using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
-        string sql = "INSERT INTO Presupuesto (Nombre, DNI, Telefono) VALUES(@Nombre, @DNI, @Telefono)";
+        string sql = "INSERT INTO Presupuesto (NombreDestinatario) VALUES(@nombreDestinario)";
         using var comando = new SqliteCommand(sql, conexion);
-        comando.Parameters.Add(new SqliteParameter("@descripcion", presupuesto.NombreDestinatario));
-        comando.Parameters.Add(new SqliteParameter("@precio", presupuesto.FechaCreacion));
+        comando.Parameters.Add(new SqliteParameter("@nombreDestinario", presupuesto.NombreDestinatario));
         comando.ExecuteNonQuery();
 
         return true;
     }
-    public List<Producto> Listar()
+    public List<Presupuesto> Listar()
     {
-        List<Producto> productos = new List<Producto>();
+        List<Presupuesto> presupuestos = new();
         string queryString = "SELECT * FROM Productos;";
         using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
@@ -28,47 +27,46 @@ public class PresupuestooRepository
             {
                 while (reader.Read()) // si encontró un registro
                 {
-                    var producto = new Producto
+                    var presupuesto = new Presupuesto
                     {
-                        idProducto = reader.GetInt32(0),
-                        descripcion = reader.GetString(1),
-                        precio = reader.GetInt32(2),
+                        IdPresupuesto = reader.GetInt32(0),
+                        NombreDestinatario = reader.GetString(1),
+                        FechaCreacion = reader.GetDateTime(2),
                     };
-                    productos.Add(producto);
+                    presupuestos.Add(presupuesto);
                 }
                 connection.Close();
             }
 
-            return productos;
+            return presupuestos;
         }
     }
-    public Producto ObtenerProductoID(int id)
+    public Presupuesto ObtenerProductoID(int id)
     {
-        using var conexion = new SqliteConnection(cadenaConexionn);
+        using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
-        string sql = "SELECT Id, Nombre, DNI, Telefono FROM Paciente WHERE Id = @Id";
+        string sql = "SELECT NombreDestinatario, FechaCreacion FROM Presupuesto WHERE Id = @Id";
         using var comando = new SqliteCommand(sql, conexion);
         comando.Parameters.Add(new SqliteParameter("@Id", id));
         using var reader = comando.ExecuteReader();
         if (reader.Read()) // si encontró un registro
         {
-            var paciente = new Producto
+            var presupuesto = new Presupuesto
             {
-                idProducto = reader.GetInt32(0),
-                descripcion = reader.GetString(1),
-                precio = reader.GetInt32(2),
+                NombreDestinatario = reader.GetString(1),
+                FechaCreacion = reader.GetDateTime(2),
             };
-            return paciente;
+            return presupuesto;
         }
         return null;
     }
-    public bool Modificar(int id, Producto producto)
+    public bool Modificar(int id, Presupuesto presupuesto)
     {
-        using var conexion = new SqliteConnection(cadenaConexionn);
+        using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
-        string sql = "UPDATE Producto SET Precio = @Precio WHERE Id = @Id";
+        string sql = "UPDATE Producto SET NombreDestinatario = @NombreDestinatario WHERE Id = @Id";
         using var comando = new SqliteCommand(sql, conexion);
-        comando.Parameters.Add(new SqliteParameter("@Precio", producto.precio));
+        comando.Parameters.Add(new SqliteParameter("@NombreDestinatario", presupuesto.NombreDestinatario));
         comando.Parameters.Add(new SqliteParameter("@Id", id));
         comando.ExecuteNonQuery();
 
@@ -76,9 +74,9 @@ public class PresupuestooRepository
     }
     public bool EliminarProductoID(int id)
     {
-        using var conexion = new SqliteConnection(cadenaConexionn);
+        using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
-        string sql = "DELETE FROM Paciente WHERE Id = @Id";
+        string sql = "DELETE FROM Presupuesto WHERE Id = @Id";
         using var comando = new SqliteCommand(sql, conexion);
         comando.Parameters.Add(new SqliteParameter("@Id", id));
         comando.ExecuteNonQuery();

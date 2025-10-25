@@ -1,8 +1,8 @@
 public interface IProductoRepository
 {
-User FindById(int id);
-IEnumerable FindAll();
-void Insert(User usuario);
-void Update(User usuario);
-void Delete(int idUsuario);
+    public bool Crear(Producto producto);
+    public List<Producto> Listar();
+    public Producto ObtenerProductoID(int id);
+    public bool Modificar(int id, Producto producto);
+    public bool EliminarProductoID(int id);
 }
