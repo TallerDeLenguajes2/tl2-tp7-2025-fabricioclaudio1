@@ -41,7 +41,7 @@ public class PresupuestooRepository
             return presupuestos;
         }
     }
-    public Presupuesto ObtenerProductoID(int id)
+    public Presupuesto ObtenerID(int id)
     {
         using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
@@ -72,7 +72,7 @@ public class PresupuestooRepository
 
         return true;
     }
-    public bool EliminarProductoID(int id)
+    public bool EliminarID(int id)
     {
         using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();

@@ -41,7 +41,7 @@ public class ProductoRepository : IProductoRepository
 
         return productos;
     }
-    public Producto ObtenerProductoID(int id)
+    public Producto ObtenerID(int id)
     {
         string sql = "SELECT nombre, dni, telefono FROM Paciente WHERE Id = @Id";
         
@@ -74,7 +74,7 @@ public class ProductoRepository : IProductoRepository
 
         return true;
     }
-    public bool EliminarProductoID(int id)
+    public bool EliminarID(int id)
     {
         using var conexion = new SqliteConnection(cadenaConexion);
         conexion.Open();
