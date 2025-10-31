@@ -19,7 +19,7 @@ public class PresupuestoController : ControllerBase
     //endpoints, Action Methods (Get, Post,etc.)
 
     [HttpPost]
-    [Route("CrearPresupuesto")]
+    [Route("/api/CrearPresupuesto")]
     public IActionResult CrearPresupuesto([FromBody] Presupuesto nuevoPresupuesto)
     {
 
@@ -28,7 +28,7 @@ public class PresupuestoController : ControllerBase
     }
 
     [HttpPost]
-    [Route("/api/PresupuestoCompletar/{idPresupuesto}/ProductoDetalle")]
+    [Route("/api/PresupuestoCompletar/{idPresupuesto}")]
     public IActionResult CompletarPresupuesto(int idPresupuesto, [FromBody] PresupuestoDetalle presupuestoDetalle)
     {
         List<Producto> productos = productoRepository.Listar();
@@ -49,7 +49,7 @@ public class PresupuestoController : ControllerBase
     }
 
     [HttpGet]
-    [Route("ObtenerPresupuestoId/{id}")]
+    [Route("/api/ObtenerPresupuesto/{id}")]
     public IActionResult ObtenerPresupuestoId(int id)
     {
         Presupuesto presupuesto = presupuestoRepository.ObtenerID(id);
@@ -62,23 +62,15 @@ y una cantidad al presupuesto. */
 
 
     [HttpGet]
-    [Route("ListarPresupuesto")]
+    [Route("/api/ListarPresupuesto/")]
     public IActionResult ListarPresupuesto()
     {
         List<Presupuesto> listarPresupuesto = presupuestoRepository.Listar();
         return Ok(listarPresupuesto);
     }
 
-    [HttpPut]
-    [Route("ActualizarPresupuesto")]
-    public IActionResult ActualizarPresupuesto([FromBody] Presupuesto p)
-    {
-        presupuestoRepository.Modificar(p.IdPresupuesto, p);
-        return Ok("Presupuesto Modificado Exitosamente");
-    }
-
     [HttpDelete]
-    [Route("EliminarPresupuesto/{id}")]
+    [Route("/api/EliminarPresupuesto/{id}")]
     public IActionResult EliminarPresupuesto(int id)
     {
         bool eliminado = presupuestoRepository.EliminarID(id);
