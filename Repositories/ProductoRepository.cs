@@ -2,7 +2,7 @@ using System.ComponentModel;
 using Microsoft.Data.Sqlite;
 public class ProductoRepository : IProductoRepository
 {
-    string cadenaConexion = "Data Source=Tienda_final.db";
+    string cadenaConexion = "Data Source=Tienda.db";
 
     public bool Crear(Producto producto)
     {
