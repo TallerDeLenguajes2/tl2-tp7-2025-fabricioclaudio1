@@ -3,24 +3,39 @@ public class Presupuesto
     public int IdPresupuesto { get; set; }
     public string NombreDestinatario { get; set; }
     public DateTime FechaCreacion { get; set; }
-    public List<PresupuestoDetalle> Detalle { get; set; } = new List<PresupuestoDetalle>();
+    public List<PresupuestoDetalle> ListaDetalle { get; set; } = new List<PresupuestoDetalle>();
 
     public Presupuesto()
     {
         
     }
-    public int MontoPresupuesto()
+    public double MontoPresupuesto()
     {
-        return 1;
+        double montoPresupuesto = 0;
+        foreach (var detalles in ListaDetalle)
+        {
+            montoPresupuesto += detalles.producto.precio;
+        }
+
+        return montoPresupuesto;
     }
     
-    public int MontoPresupuestoConIva()
+    public double MontoPresupuestoConIva()
     {
-        return 1;
+        double montoPresupuesto = MontoPresupuesto();
+        montoPresupuesto *= 1.21;
+
+        return montoPresupuesto;
     }
 
     public int CantidadProductos()
     {
-        return 1;
+        int cantidadProductos = 0;
+        foreach (var detalles in ListaDetalle)
+        {
+            cantidadProductos += detalles.cantidad;
+        }
+
+        return cantidadProductos;
     }
 }

@@ -17,7 +17,7 @@ public class ProductoController : ControllerBase
     //endpoints, Action Methods (Get, Post,etc.)
 
     [HttpPost]
-    [Route("CrearProducto")]
+    [Route("/api/CrearProducto")]
     public IActionResult CrearProducto([FromBody] Producto nuevoProducto)
     {
 
@@ -26,7 +26,7 @@ public class ProductoController : ControllerBase
     }
 
     [HttpGet]
-    [Route("ObtenerProductoId/{id}")]
+    [Route("/api/ObtenerProductoId/{id}")]
     public IActionResult ObtenerProductoId(int id)
     {
         Producto producto = productoRepository.ObtenerID(id);
@@ -35,7 +35,7 @@ public class ProductoController : ControllerBase
     }
 
     [HttpGet]
-    [Route("ListarProductos")]
+    [Route("/api/ListarProductos")]
     public IActionResult ListarProducto()
     {
         List<Producto> listaProductos = productoRepository.Listar();
@@ -43,7 +43,7 @@ public class ProductoController : ControllerBase
     }
 
     [HttpPut]
-    [Route("ActualizarProducto")]
+    [Route("/api/ActualizarProducto")]
     public IActionResult ActualizarProducto([FromBody] Producto p)
     {
         productoRepository.Modificar(p.idProducto, p);
@@ -51,7 +51,7 @@ public class ProductoController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("EliminarProducto/{id}")]
+    [Route("/api/EliminarProducto/{id}")]
     public IActionResult EliminarProducto(int id)
     {
         bool eliminado = productoRepository.EliminarID(id);

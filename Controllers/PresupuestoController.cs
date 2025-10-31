@@ -7,8 +7,8 @@ namespace tl2_tp7_2025_fabricioclaudio1.Controllers;
 [Route("[controller]")]
 public class PresupuestoController : ControllerBase
 {
-    private PresupuestoRepository presupuestoRepository;
-    private ProductoRepository productoRepository;
+    private readonly PresupuestoRepository presupuestoRepository;
+    private readonly ProductoRepository productoRepository;
 
     public PresupuestoController()
     {
@@ -36,7 +36,7 @@ public class PresupuestoController : ControllerBase
         Presupuesto presupuesto = presupuestoRepository.ObtenerID(idPresupuesto);
 
         Presupuesto nuevoPresupuesto = new Presupuesto();
-        nuevoPresupuesto.Detalle.Add(presupuestoDetalle);
+        nuevoPresupuesto.ListaDetalle.Add(presupuestoDetalle);
 
 
         if (productos.Exists(p => p == presupuestoDetalle.producto))
